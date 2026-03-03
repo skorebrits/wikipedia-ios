@@ -62,6 +62,7 @@
     NSNumber *latitude = @(77.1);
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"wikipedia://places?lon=%.6f&lat=%.6f", longitude.doubleValue, latitude.doubleValue]];
     NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
+    XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
     XCTAssertEqualWithAccuracy([(NSNumber *)activity.userInfo[@"WMFPlacesLongitude"] doubleValue], longitude.doubleValue, 1e-6);
     XCTAssertEqualWithAccuracy([(NSNumber *)activity.userInfo[@"WMFPlacesLatitude"] doubleValue], latitude.doubleValue, 1e-6);
 }
@@ -80,7 +81,7 @@
 
     for (NSURL *url in urls) {
         NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
-
+        XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
         XCTAssertNil(activity.userInfo[@"WMFPlacesLongitude"]);
         XCTAssertNil(activity.userInfo[@"WMFPlacesLatitude"]);
     }
