@@ -11,6 +11,6 @@ Modify Wikipedia App to
 - Display location specified by coordinates
 
 ## Deep link url format
-```wikipedia://Places?lat=<latitude>&lon=<longitude>```
+```wikipedia://places?lat=<latitude>&lon=<longitude>```
 
 ## TODO: Add info on demo app when implementing feature
