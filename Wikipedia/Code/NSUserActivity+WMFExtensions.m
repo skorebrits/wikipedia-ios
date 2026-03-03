@@ -62,15 +62,35 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
 + (instancetype)wmf_placesActivityWithURL:(NSURL *)activityURL {
     NSURLComponents *components = [NSURLComponents componentsWithURL:activityURL resolvingAgainstBaseURL:NO];
     NSURL *articleURL = nil;
+    NSNumber *longitude = nil;
+    NSNumber *latitude = nil;
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     for (NSURLQueryItem *item in components.queryItems) {
         if ([item.name isEqualToString:@"WMFArticleURL"]) {
             NSString *articleURLString = item.value;
             articleURL = [NSURL URLWithString:articleURLString];
-            break;
+        } else if ([item.name isEqualToString:@"lon"]) {
+            longitude = [numberFormatter numberFromString:item.value];
+        } else if ([item.name isEqualToString:@"lat"]) {
+            latitude = [numberFormatter numberFromString:item.value];
         }
     }
+    
     NSUserActivity *activity = [self wmf_pageActivityWithName:@"Places"];
     activity.webpageURL = articleURL;
+    
+    BOOL isLongitudeValid = (longitude != nil && longitude.doubleValue >= -180.0 && longitude.doubleValue <= 180.0);
+    BOOL isLatitudeValid = (latitude != nil && latitude.doubleValue >= -90.0 && latitude.doubleValue <= 90.0);
+    
+    if(isLongitudeValid && isLatitudeValid) {
+        NSMutableDictionary *userInfo = activity.userInfo ? [activity.userInfo mutableCopy] : [NSMutableDictionary dictionary];
+        userInfo[@"WMFPlacesLongitude"] = longitude;
+        userInfo[@"WMFPlacesLatitude"] = latitude;
+        activity.userInfo = [userInfo copy];
+    }
+    
     return activity;
 }
 
