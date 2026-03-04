@@ -6,6 +6,9 @@
 
 NSString *const WMFNavigateToActivityNotification = @"WMFNavigateToActivityNotification";
 
+static NSString * const WMFPlacesLongitude = @"WMFPlacesLongitude";
+static NSString * const WMFPlacesLatitude  = @"WMFPlacesLatitude";
+
 // Use to suppress "User-facing text should use localized string macro" Analyzer warning
 // where appropriate.
 __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *wmf_localizationNotNeeded(NSString *s) {
@@ -86,8 +89,8 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
     
     if(isLongitudeValid && isLatitudeValid) {
         NSMutableDictionary *userInfo = activity.userInfo ? [activity.userInfo mutableCopy] : [NSMutableDictionary dictionary];
-        userInfo[@"WMFPlacesLongitude"] = longitude;
-        userInfo[@"WMFPlacesLatitude"] = latitude;
+        userInfo[WMFPlacesLongitude] = longitude;
+        userInfo[WMFPlacesLatitude] = latitude;
         activity.userInfo = [userInfo copy];
     }
     
@@ -279,6 +282,18 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
 
 - (NSURL *)wmf_contentURL {
     return self.userInfo[@"WMFURL"];
+}
+
+- (NSValue *)wmf_searchCoordinate {
+    NSNumber *latitude  = self.userInfo[WMFPlacesLatitude];
+    NSNumber *longitude = self.userInfo[WMFPlacesLongitude];
+
+    if (!latitude || !longitude) {
+        return nil;
+    }
+
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+    return [NSValue value:&coordinate withObjCType:@encode(CLLocationCoordinate2D)];
 }
 
 + (NSURLComponents *)wmf_baseURLComponentsForActivityOfType:(WMFUserActivityType)type {

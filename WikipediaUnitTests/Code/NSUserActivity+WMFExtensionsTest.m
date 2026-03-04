@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 #import "NSUserActivity+WMFExtensions.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface NSUserActivity_WMFExtensions_wmf_activityForWikipediaScheme_Test : XCTestCase
 @end
@@ -55,6 +56,7 @@
     NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
     XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
     XCTAssertEqualObjects(activity.webpageURL.absoluteString, testURLString);
+    XCTAssertNil(activity.wmf_searchCoordinate);
 }
 
 - (void)testPlacesURLWithCoordinates {
@@ -63,8 +65,11 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"wikipedia://places?lon=%.6f&lat=%.6f", longitude.doubleValue, latitude.doubleValue]];
     NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
     XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
-    XCTAssertEqualWithAccuracy([(NSNumber *)activity.userInfo[@"WMFPlacesLongitude"] doubleValue], longitude.doubleValue, 1e-6);
-    XCTAssertEqualWithAccuracy([(NSNumber *)activity.userInfo[@"WMFPlacesLatitude"] doubleValue], latitude.doubleValue, 1e-6);
+    XCTAssertNotNil(activity.wmf_searchCoordinate);
+    CLLocationCoordinate2D location;
+    [activity.wmf_searchCoordinate getValue:&location];
+    XCTAssertEqualWithAccuracy(location.longitude, longitude.doubleValue, 1e-6);
+    XCTAssertEqualWithAccuracy(location.latitude, latitude.doubleValue, 1e-6);
 }
 
 - (void)testPlacesURLWithIncorrectComponents {
@@ -82,8 +87,7 @@
     for (NSURL *url in urls) {
         NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
         XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
-        XCTAssertNil(activity.userInfo[@"WMFPlacesLongitude"]);
-        XCTAssertNil(activity.userInfo[@"WMFPlacesLatitude"]);
+        XCTAssertNil(activity.wmf_searchCoordinate);
     }
 }
 
