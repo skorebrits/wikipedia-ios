@@ -546,9 +546,11 @@ class PlacesViewController: ArticleLocationCollectionViewController, UISearchBar
     }
 
     func region(thatFits articles: [WMFArticle]) -> MKCoordinateRegion {
-        let coordinates: [CLLocationCoordinate2D] =  articles.compactMap({ (article) -> CLLocationCoordinate2D? in
-            return article.coordinate
-        })
+        let coordinates: [CLLocationCoordinate2D] =  articles.compactMap(\.coordinate)
+        return region(thatFits: coordinates)
+    }
+    
+    func region(thatFits coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
         guard coordinates.count > 1 else {
             return coordinates.wmf_boundingRegion(with: 10000)
         }
@@ -2086,6 +2088,13 @@ class PlacesViewController: ArticleLocationCollectionViewController, UISearchBar
         let displayTitle = article.displayTitle ?? title
         let searchResult = MWKSearchResult(articleID: 0, revID: 0, title: title, displayTitle: displayTitle, displayTitleHTML: displayTitleHTML, wikidataDescription: article.wikidataDescription, extract: article.snippet, thumbnailURL: article.thumbnailURL, index: nil, titleNamespace: nil, location: article.location)
         currentSearch = PlaceSearch(filter: .top, type: .location, origin: .user, sortStyle: .links, string: nil, region: region, localizedDescription: title, searchResult: searchResult, siteURL: articleURL.wmf_site)
+    }
+    
+    @objc public func showCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        guard view != nil else { return } // force view instantiation
+        
+        let region = self.region(thatFits: [coordinate])
+        currentSearch = PlaceSearch(filter: .top, type: .location, origin: .user, sortStyle: .links, string: nil, region: region, localizedDescription: nil, searchResult: nil, siteURL: nil)
     }
 
     fileprivate func searchForFirstSearchSuggestion() {
