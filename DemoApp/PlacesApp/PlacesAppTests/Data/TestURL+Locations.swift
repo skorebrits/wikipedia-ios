@@ -1,0 +1,28 @@
+//
+//  TestURL+Locations.swift
+//  PlacesApp
+//
+//  Created by Sander Korebrits on 05/03/2026.
+//
+
+import Testing
+import Foundation
+
+@testable import PlacesApp
+
+struct TestURLLocations {
+    
+    @Test("test returns url when url is valid")
+    func testValidURL() throws {
+        let url: URL = try .locations()
+        
+        #expect(url.absoluteString == PlacesConstants.locationsURL)
+    }
+    
+    @Test("test throws error when url is invalid")
+    func testInalidURL() {
+        #expect(throws: PlacesError.invalidURL) {
+            let _ = try URL.locations(url: "")
+        }
+    }
+}
