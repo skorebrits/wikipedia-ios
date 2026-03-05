@@ -8,5 +8,5 @@
 enum PlacesState {
     case loading
     case error(ErrorViewData)
-    case loaded
+    case loaded([PlacesCellViewData])
 }

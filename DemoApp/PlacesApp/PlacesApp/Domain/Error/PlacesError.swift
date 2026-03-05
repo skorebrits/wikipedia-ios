@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlacesError: Error {
+enum PlacesError: Error, CaseIterable {
     case invalidURL
     case invalidJSON
     case noInternet

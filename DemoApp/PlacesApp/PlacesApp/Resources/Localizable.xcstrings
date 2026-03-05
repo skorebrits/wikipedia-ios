@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Did load" : {
-
-    },
     "error.button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -15,7 +12,7 @@
         }
       }
     },
-    "error.title.nointernet" : {
+    "error.label.nointernet" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -26,7 +23,7 @@
         }
       }
     },
-    "error.title.server" : {
+    "error.label.server" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -37,7 +34,7 @@
         }
       }
     },
-    "error.title.timeout" : {
+    "error.label.timeout" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -48,13 +45,24 @@
         }
       }
     },
-    "error.title.unknown" : {
+    "error.label.unknown" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error"
+          }
+        }
+      }
+    },
+    "places.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Places"
           }
         }
       }
