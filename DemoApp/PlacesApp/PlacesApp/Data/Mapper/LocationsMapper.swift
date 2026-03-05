@@ -6,7 +6,7 @@
 //
 
 struct LocationsMapper {
-    
+
     static func map(response: LocationsResponse) -> [Location] {
         response.locations.map {
             Location(

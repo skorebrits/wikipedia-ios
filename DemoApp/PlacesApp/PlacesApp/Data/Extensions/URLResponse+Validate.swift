@@ -8,12 +8,12 @@
 import Foundation
 
 extension URLResponse {
-    
+
     var isValidHTTPResponse: Bool {
         guard let httpResponse = self as? HTTPURLResponse else {
             return false
         }
-        
+
         return (200..<300).contains(httpResponse.statusCode)
     }
 }
