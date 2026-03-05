@@ -20,6 +20,14 @@ struct PlacesPresenter {
         .init(errorLabel: mapErrorLabel(error), errorButton: .init(localized: "error.button"))
     }
 
+    static func notInstalledErrorViewData() -> AlertViewData {
+        .init(
+            title: .init(localized: "alert.title"),
+            message: .init(localized: "alert.message"),
+            dismissButton: .init(localized: "alert.button")
+        )
+    }
+
     private static func mapErrorLabel(_ error: Error) -> String {
         let placesError = (error as? PlacesError) ?? PlacesError(error: error)
 

@@ -12,6 +12,8 @@ final class PlacesViewModel {
 
     var state: PlacesState
     var locations: [String: Location] = [:]
+    var alertViewData = PlacesPresenter.notInstalledErrorViewData()
+    var showAlert = false
 
     private let repository: LocationsRepository
     private let launcher: WikipediaLauncher
@@ -36,7 +38,10 @@ final class PlacesViewModel {
     func select(id: String) {
         guard let location = locations[id] else { return }
 
-        guard launcher.canLaunch else { return }
+        guard launcher.canLaunch else {
+            showAlert = true
+            return
+        }
 
         launcher.launchWith(longitude: location.longitude, latitude: location.latitude)
     }

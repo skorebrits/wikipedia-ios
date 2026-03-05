@@ -19,6 +19,15 @@ struct PlacesView: View {
         .task {
             await viewModel.fetchLocations()
         }
+        .modifier(
+            AlertViewModifier(
+                isPresented: $viewModel.showAlert,
+                viewData: viewModel.alertViewData,
+                onDismiss: {
+                    viewModel.showAlert = false
+                }
+            )
+        )
     }
 
     @ViewBuilder

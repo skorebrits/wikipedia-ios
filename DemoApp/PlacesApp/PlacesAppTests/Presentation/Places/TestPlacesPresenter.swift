@@ -42,4 +42,13 @@ struct TestPlacesPresenter {
             #expect(sut.errorLabel == expectedLabel)
         }
     }
+    
+    @Test("test returns AlertViewData for not installed error")
+    func testNotInstalledErrorViewData() {
+        let sut = PlacesPresenter.notInstalledErrorViewData()
+        
+        #expect(sut.title == .init(localized: "alert.title"))
+        #expect(sut.message == .init(localized: "alert.message"))
+        #expect(sut.dismissButton == .init(localized: "alert.button"))
+    }
 }
