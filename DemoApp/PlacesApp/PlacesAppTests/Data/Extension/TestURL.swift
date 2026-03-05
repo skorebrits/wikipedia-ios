@@ -25,4 +25,11 @@ struct TestURLLocations {
             let _ = try URL.locations(url: "")
         }
     }
+    
+    @Test("test returns wikipedia url")
+    func testWikipediaURL() throws {
+        let sut = try URL.wikipediaOpenURLWith(longitude: 1.0, latitude: 1.0)
+        
+        #expect(sut.absoluteString == "wikipedia://places?lon=1.0&lat=1.0")
+    }
 }

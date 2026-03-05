@@ -7,4 +7,6 @@
 
 enum PlacesConstants {
     static let locationsURL = "https://raw.githubusercontent.com/abnamrocoesd/assignment-ios/main/locations.json"
+    static let wikipediaScheme = "wikipedia"
+    static let wikipediaHost = "places"
 }
