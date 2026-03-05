@@ -1,0 +1,31 @@
+//
+//  PlacesViewModel.swift
+//  PlacesApp
+//
+//  Created by Sander Korebrits on 05/03/2026.
+//
+
+import SwiftUI
+
+@Observable
+final class PlacesViewModel {
+
+    var state: PlacesState
+
+    private let repository: LocationsRepository
+
+    init(repository: LocationsRepository = .init()) {
+        self.repository = repository
+        state = .loading
+    }
+
+    func fetchLocations() async {
+        do {
+            state = .loading
+            _ = try await repository.fetchLocations()
+            state = .loaded
+        } catch {
+            state = .error(PlacesPresenter.map(error))
+        }
+    }
+}
