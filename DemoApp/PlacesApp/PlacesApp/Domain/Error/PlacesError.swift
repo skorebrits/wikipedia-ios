@@ -7,4 +7,5 @@
 
 enum PlacesError: Error {
     case invalidURL
+    case invalidJSON
 }
