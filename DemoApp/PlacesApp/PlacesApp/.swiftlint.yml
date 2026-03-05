@@ -1,0 +1,8 @@
+parent_config: ../../.swiftlint.yml
+
+opt_in_rules:
+    - force_try
+    - force_cast
+    - trailing_newline
+    - trailing_whitespace
+    - todo
