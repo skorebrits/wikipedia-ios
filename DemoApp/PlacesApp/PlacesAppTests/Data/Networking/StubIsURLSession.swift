@@ -28,6 +28,7 @@ struct StubIsURLSession: IsURLSession {
                 fatalError("No response or error provided")
             }
         }
+
         return response
     }
     
