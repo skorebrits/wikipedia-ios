@@ -6,7 +6,7 @@
 //
 
 struct AlertViewData {
-    var title: String
-    var message: String
-    var dismissButton: String
+    let title: String
+    let message: String
+    let dismissButton: String
 }
