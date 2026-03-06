@@ -27,6 +27,17 @@ struct PlacesPresenter {
             dismissButton: .init(localized: "alert.button")
         )
     }
+    
+    static func createLocationViewData() -> CreateLocationViewData {
+        .init(
+            title: .init(localized: "create.location.title"),
+            labelName: .init(localized: "create.location.label.name"),
+            labelLongitude: .init(localized: "create.location.label.longitude"),
+            labelLatitude: .init(localized: "create.location.label.latitude"),
+            buttonOk: .init(localized: "create.location.button.ok"),
+            buttonCancel: .init(localized: "create.location.button.cancel")
+        )
+    }
 
     private static func mapErrorLabel(_ error: Error) -> String {
         let placesError = (error as? PlacesError) ?? PlacesError(error: error)
