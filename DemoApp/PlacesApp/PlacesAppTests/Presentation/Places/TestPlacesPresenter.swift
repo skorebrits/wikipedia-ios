@@ -48,6 +48,12 @@ struct TestPlacesPresenter {
             
             #expect(sut.errorLabel == expectedLabel)
         }
+        
+        let error = NSError(domain: "test", code: 0)
+        let sut = PlacesPresenter.map(error)
+        #expect(sut.errorLabel == .init(localized: "error.label.unknown"))
+        #expect(sut.errorButton == .init(localized: "error.button"))
+        #expect(sut.errorButtonHint == .init(localized: "error.button.hint"))
     }
     
     @Test("test returns AlertViewData for not installed error")
