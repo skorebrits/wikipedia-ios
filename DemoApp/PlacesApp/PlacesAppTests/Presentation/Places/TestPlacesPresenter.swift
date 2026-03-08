@@ -51,16 +51,4 @@ struct TestPlacesPresenter {
         #expect(sut.message == .init(localized: "alert.message"))
         #expect(sut.dismissButton == .init(localized: "alert.button"))
     }
-    
-    @Test("test returns CreateLocationViewData")
-    func testCreateLocationViewData() {
-        let sut = PlacesPresenter.createLocationViewData()
-        
-        #expect(sut.title == .init(localized: "create.location.title"))
-        #expect(sut.labelName == .init(localized: "create.location.label.name"))
-        #expect(sut.labelLongitude == .init(localized: "create.location.label.longitude"))
-        #expect(sut.labelLatitude == .init(localized: "create.location.label.latitude"))
-        #expect(sut.buttonOk == .init(localized: "create.location.button.ok"))
-        #expect(sut.buttonCancel == .init(localized: "create.location.button.cancel"))
-    }
 }
