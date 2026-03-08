@@ -93,7 +93,6 @@
       }
     },
     "create.location.label.longitude" : {
-      "comment" : "L",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -177,6 +176,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error"
+          }
+        }
+      }
+    },
+    "places.button.add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Location"
+          }
+        }
+      }
+    },
+    "places.button.add.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open a screen to add a custom location"
+          }
+        }
+      }
+    },
+    "places.label.loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading places"
+          }
+        }
+      }
+    },
+    "places.label.places" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List of places"
           }
         }
       }

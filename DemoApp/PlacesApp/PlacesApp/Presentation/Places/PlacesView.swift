@@ -26,6 +26,8 @@ struct PlacesView: View {
             }
             .buttonStyle(.glass)
             .padding()
+            .accessibilityLabel(String(localized: "places.button.add"))
+            .accessibilityHint(String(localized: "places.button.add.hint"))
         }
         .task {
             await viewModel.fetchLocations()
@@ -55,12 +57,14 @@ struct PlacesView: View {
         switch viewModel.state {
         case .loading:
             LoadingView()
+                .accessibilityLabel(String(localized: "places.label.loading"))
         case .error(let errorViewData):
             ErrorView(viewData: errorViewData) {
                 Task {
                     await viewModel.fetchLocations()
                 }
             }
+            .accessibilityLabel(errorViewData.errorLabel)
         case .loaded(let placesViewData):
             List(placesViewData) { viewData in
                 PlacesCellView(viewData: viewData) { id in
@@ -68,6 +72,7 @@ struct PlacesView: View {
                 }
             }
             .listStyle(.plain)
+            .accessibilityLabel(String(localized: "places.label.places"))
         }
     }
 }
