@@ -136,6 +136,17 @@
         }
       }
     },
+    "error.button.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry loading locations"
+          }
+        }
+      }
+    },
     "error.label.nointernet" : {
       "extractionState" : "manual",
       "localizations" : {

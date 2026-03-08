@@ -24,7 +24,11 @@ struct PlacesPresenter {
     }
 
     static func map(_ error: Error) -> ErrorViewData {
-        .init(errorLabel: mapErrorLabel(error), errorButton: .init(localized: "error.button"))
+        .init(
+            errorLabel: mapErrorLabel(error),
+            errorButton: .init(localized: "error.button"),
+            errorButtonHint: .init(localized: "error.button.hint")
+        )
     }
 
     static func notInstalledErrorViewData() -> AlertViewData {

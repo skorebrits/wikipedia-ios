@@ -35,9 +35,10 @@ struct TestPlacesPresenter {
     func testMappingErrors() {
         for error in PlacesError.allCases {
             let sut = PlacesPresenter.map(error)
-            
+
             #expect(sut.errorButton == .init(localized: "error.button"))
-            
+            #expect(sut.errorButtonHint == .init(localized: "error.button.hint"))
+
             let expectedLabel: String = switch error {
                 case .noInternet: .init(localized: "error.label.nointernet")
                 case .timeOut: .init(localized: "error.label.timeout")

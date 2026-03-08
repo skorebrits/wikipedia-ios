@@ -18,7 +18,7 @@ struct CreateLocationPresenter {
             buttonOk: .init(localized: "create.location.button.ok"),
             buttonOkHint: .init(localized: "create.location.button.ok.hint"),
             buttonCancel: .init(localized: "create.location.button.cancel"),
-            buttonCancelHint: .init(localized: "create.location.button.cancel.hint"),
+            buttonCancelHint: .init(localized: "create.location.button.cancel"),
             buttonOkEnabled: hasValidInput
         )
     }

@@ -8,4 +8,5 @@
 struct ErrorViewData {
     let errorLabel: String
     let errorButton: String
+    let errorButtonHint: String
 }
