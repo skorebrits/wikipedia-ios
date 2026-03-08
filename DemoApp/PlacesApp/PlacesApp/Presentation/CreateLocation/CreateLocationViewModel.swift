@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 @Observable
 final class CreateLocationViewModel {
@@ -19,7 +20,9 @@ final class CreateLocationViewModel {
         .init(
             name: nameField,
             longitude: Double(longitudeField) ?? 0.0,
-            latitude: Double(latitudeField) ?? 0.0
+            latitude: Double(latitudeField) ?? 0.0,
+            createDate: Date(),
+            userCreated: true
         )
     }
 

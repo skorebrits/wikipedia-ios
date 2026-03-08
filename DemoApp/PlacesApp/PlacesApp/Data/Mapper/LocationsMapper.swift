@@ -5,6 +5,8 @@
 //  Created by Sander Korebrits on 05/03/2026.
 //
 
+import Foundation
+
 struct LocationsMapper {
 
     static func map(response: LocationsResponse) -> [Location] {
@@ -12,7 +14,9 @@ struct LocationsMapper {
             Location(
                 name: $0.name ?? "-",
                 longitude: $0.long,
-                latitude: $0.lat
+                latitude: $0.lat,
+                createDate: Date(),
+                userCreated: false
             )
         }
     }

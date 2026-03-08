@@ -75,7 +75,6 @@ struct CreateLocationView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
-            
         }
         .controlSize(.large)
         .padding(12)

@@ -10,10 +10,17 @@ import Foundation
 struct PlacesPresenter {
 
     static func map(_ locations: [String: Location]) -> [PlacesCellViewData] {
-        locations.map {
-            PlacesCellViewData(id: $0.key, name: $0.value.name)
+        let fetched = locations
+            .filter { !$0.value.userCreated }
+            .sorted { $0.value.name < $1.value.name }
+
+        let userCreated = locations
+            .filter { $0.value.userCreated }
+            .sorted { $0.value.createDate < $1.value.createDate }
+
+        return (fetched + userCreated).map {
+            .init(id: $0.key, name: $0.value.name)
         }
-        .sorted(using: KeyPathComparator(\.name))
     }
 
     static func map(_ error: Error) -> ErrorViewData {

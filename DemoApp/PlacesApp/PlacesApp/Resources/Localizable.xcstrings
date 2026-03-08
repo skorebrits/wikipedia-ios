@@ -88,7 +88,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Places"
+            "value" : "Place"
           }
         }
       }
@@ -160,7 +160,14 @@
       }
     },
     "places.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Places"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

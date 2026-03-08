@@ -14,6 +14,7 @@ final class PlacesViewModel {
     var locations: [String: Location] = [:]
     var alertViewData = PlacesPresenter.notInstalledErrorViewData()
     var showAlert = false
+    var showCreateLocation = false
 
     private let repository: LocationsRepository
     private let launcher: WikipediaLauncher
@@ -28,7 +29,11 @@ final class PlacesViewModel {
         do {
             state = .loading
             let fetchedLocations  = try await repository.fetchLocations()
-            locations = .init(uniqueKeysWithValues: fetchedLocations.map { (UUID().uuidString, $0)})
+            locations = .init(
+                uniqueKeysWithValues:
+                    fetchedLocations
+                    .map { (UUID().uuidString, $0)}
+            )
             state = .loaded(PlacesPresenter.map(locations))
         } catch {
             state = .error(PlacesPresenter.map(error))
@@ -44,5 +49,10 @@ final class PlacesViewModel {
         }
 
         launcher.launchWith(longitude: location.longitude, latitude: location.latitude)
+    }
+
+    func addLocation(location: Location) {
+        locations[UUID().uuidString] = location
+        state = .loaded(PlacesPresenter.map(locations))
     }
 }
