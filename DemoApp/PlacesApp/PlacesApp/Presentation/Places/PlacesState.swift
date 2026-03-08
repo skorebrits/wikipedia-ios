@@ -9,4 +9,9 @@ enum PlacesState {
     case loading
     case error(ErrorViewData)
     case loaded([PlacesCellViewData])
+
+    var isLoaded: Bool {
+        if case .loaded = self { return true }
+        return false
+    }
 }
