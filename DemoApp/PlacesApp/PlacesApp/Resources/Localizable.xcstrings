@@ -48,6 +48,17 @@
         }
       }
     },
+    "create.location.button.cancel.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss without saving"
+          }
+        }
+      }
+    },
     "create.location.button.ok" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -55,6 +66,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ok"
+          }
+        }
+      }
+    },
+    "create.location.button.ok.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save location"
           }
         }
       }

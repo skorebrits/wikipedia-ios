@@ -11,6 +11,8 @@ struct CreateLocationViewData {
     let labelLongitude: String
     let labelLatitude: String
     let buttonOk: String
+    let buttonOkHint: String
     let buttonCancel: String
+    let buttonCancelHint: String
     let buttonOkEnabled: Bool
 }

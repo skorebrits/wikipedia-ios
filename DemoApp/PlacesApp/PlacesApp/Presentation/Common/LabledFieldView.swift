@@ -27,6 +27,8 @@ struct LabeledTextFieldView: View {
                     onChange()
                 }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(label)
     }
 }
 

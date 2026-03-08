@@ -21,7 +21,9 @@ struct TestCreateLocationPresenter {
         #expect(sut.labelLongitude == .init(localized: "create.location.label.longitude"))
         #expect(sut.labelLatitude == .init(localized: "create.location.label.latitude"))
         #expect(sut.buttonOk == .init(localized: "create.location.button.ok"))
+        #expect(sut.buttonOkHint == .init(localized: "create.location.button.ok.hint"))
         #expect(sut.buttonCancel == .init(localized: "create.location.button.cancel"))
+        #expect(sut.buttonCancelHint == .init(localized: "create.location.button.cancel.hint"))
         #expect(sut.buttonOkEnabled)
     }
 }

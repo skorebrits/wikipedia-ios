@@ -19,6 +19,7 @@ struct CreateLocationView: View {
         VStack(spacing: 12) {
             Text(viewModel.viewData.title)
                 .font(.title)
+                .accessibilityAddTraits(.isHeader)
 
             Spacer()
                 .frame(height: 24)
@@ -67,6 +68,8 @@ struct CreateLocationView: View {
             }
             .disabled(!viewModel.viewData.buttonOkEnabled)
             .buttonStyle(.borderedProminent)
+            .accessibilityLabel(viewModel.viewData.buttonOk)
+            .accessibilityHint(viewModel.viewData.buttonOkHint)
 
             Button {
                 isPresented = false
@@ -75,6 +78,8 @@ struct CreateLocationView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
+            .accessibilityLabel(viewModel.viewData.buttonCancel)
+            .accessibilityHint(viewModel.viewData.buttonCancelHint)
         }
         .controlSize(.large)
         .padding(12)
