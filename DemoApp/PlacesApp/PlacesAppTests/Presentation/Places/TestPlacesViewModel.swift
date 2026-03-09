@@ -20,6 +20,8 @@ struct TestPlacesViewModel {
             Issue.record("Expected loading state")
             return
         }
+        
+        #expect(!sut.createLocationEnabled)
     }
     
     @Test("test has error state when service error on location fetching")
@@ -33,6 +35,8 @@ struct TestPlacesViewModel {
             Issue.record("Expected error state")
             return
         }
+        
+        #expect(!sut.createLocationEnabled)
     }
     
     @Test("test has loaded state when locations are fetched")
@@ -46,6 +50,8 @@ struct TestPlacesViewModel {
             Issue.record("Expected loaded state")
             return
         }
+        
+        #expect(sut.createLocationEnabled)
     }
     
     @Test("test location added to list when adding location")
@@ -73,7 +79,7 @@ struct TestPlacesViewModel {
     @Test("test open wikipedia app when selected")
     func testOpenWikipediaWhenSelected() {
         let urlOpener = MockURLOpener(canOpenURL: true)
-        let launcher = WikipediaLauncher(urlOpener: urlOpener)
+        let launcher = Launcher(urlOpener: urlOpener)
         let sut = PlacesViewModel(repository: .init(), launcher: launcher)
         sut.addLocation(location:
                 .init(
@@ -102,7 +108,7 @@ struct TestPlacesViewModel {
     @Test("test does nothing when seleced invalid id")
     func testSelectedOnInvalidId() {
         let urlOpener = MockURLOpener(canOpenURL: true)
-        let launcher = WikipediaLauncher(urlOpener: urlOpener)
+        let launcher = Launcher(urlOpener: urlOpener)
         let sut = PlacesViewModel(repository: .init(), launcher: launcher)
         sut.addLocation(location:
                 .init(
@@ -130,7 +136,7 @@ struct TestPlacesViewModel {
     @Test("test shows alert when wikipedia not installed")
     func testShowAlert() {
         let urlOpener = MockURLOpener(canOpenURL: false)
-        let launcher = WikipediaLauncher(urlOpener: urlOpener)
+        let launcher = Launcher(urlOpener: urlOpener)
         let sut = PlacesViewModel(repository: .init(), launcher: launcher)
         sut.addLocation(location:
                 .init(

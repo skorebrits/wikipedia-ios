@@ -15,11 +15,14 @@ final class PlacesViewModel {
     var alertViewData = PlacesPresenter.notInstalledErrorViewData()
     var showAlert = false
     var showCreateLocation = false
+    var createLocationEnabled: Bool {
+        state.isLoaded
+    }
 
     private let repository: LocationsRepository
-    private let launcher: WikipediaLauncher
+    private let launcher: Launcher
 
-    init(repository: LocationsRepository = .init(), launcher: WikipediaLauncher = .init()) {
+    init(repository: LocationsRepository = .init(), launcher: Launcher = .init()) {
         self.repository = repository
         self.launcher = launcher
         state = .loading
@@ -43,12 +46,15 @@ final class PlacesViewModel {
     func select(id: String) {
         guard let location = locations[id] else { return }
 
-        guard launcher.canLaunch else {
+        guard
+            let url = try? URL.wikipediaOpenURLWith(longitude: location.longitude, latitude: location.latitude),
+            launcher.canLaunchURL(url: url)
+        else {
             showAlert = true
             return
         }
 
-        launcher.launchWith(longitude: location.longitude, latitude: location.latitude)
+        launcher.launchWith(url: url)
     }
 
     func addLocation(location: Location) {

@@ -24,7 +24,7 @@ struct PlacesView: View {
                     .font(.title2)
                     .frame(width:56, height: 56)
             }
-            .disabled(!viewModel.state.isLoaded)
+            .disabled(!viewModel.createLocationEnabled)
             .buttonStyle(.glass)
             .padding()
             .accessibilityLabel(String(localized: "places.button.add"))
