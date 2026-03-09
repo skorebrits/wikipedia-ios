@@ -12,13 +12,13 @@ import Foundation
 
 struct TestCreateLocationViewModel {
     
-    @Test("returns okButton disabled when initialized")
+    @Test("test returns okButton disabled when initialized")
     func testInitialStateIsInvalid() {
         let sut = CreateLocationViewModel()
         #expect(sut.viewData.buttonOkEnabled == false)
     }
 
-    @Test("returns okButton enabled and location with correct values when fields are set")
+    @Test("test returns okButton enabled and location with correct values when fields are set")
     func testLocationReturnsCorrectValues() {
         let sut = CreateLocationViewModel()
         sut.nameField = "Amsterdam"
@@ -35,7 +35,7 @@ struct TestCreateLocationViewModel {
         #expect(sut.viewData.buttonOkEnabled == true)
     }
 
-    @Test("returns invalid state when name is empty")
+    @Test("test returns invalid state when name is empty")
     func testEmptyNameDisablesButton() {
         let sut = CreateLocationViewModel()
         sut.nameField = ""
@@ -45,7 +45,7 @@ struct TestCreateLocationViewModel {
         #expect(sut.viewData.buttonOkEnabled == false)
     }
 
-    @Test("returns invalid state when longitude exceeds 180")
+    @Test("test returns invalid state when longitude exceeds 180")
     func testInvalidLongitudeDisablesButton() {
         let sut = CreateLocationViewModel()
         sut.nameField = "Amsterdam"
@@ -55,7 +55,7 @@ struct TestCreateLocationViewModel {
         #expect(sut.viewData.buttonOkEnabled == false)
     }
 
-    @Test("returns invalid state when latitude exceeds 90")
+    @Test("test returns invalid state when latitude exceeds 90")
     func testInvalidLatitudeDisablesButton() {
         let sut = CreateLocationViewModel()
         sut.nameField = "Amsterdam"
@@ -65,7 +65,7 @@ struct TestCreateLocationViewModel {
         #expect(sut.viewData.buttonOkEnabled == false)
     }
 
-    @Test("returns valid state when longitude is at boundary values -180 and 180")
+    @Test("test returns valid state when longitude is at boundary values -180 and 180")
     func testBoundaryLongitudeValuesAreValid() {
         let sut = CreateLocationViewModel()
         sut.nameField = "Amsterdam"
@@ -80,7 +80,7 @@ struct TestCreateLocationViewModel {
         #expect(sut.viewData.buttonOkEnabled == true)
     }
 
-    @Test("returns valid state when latitude is at boundary values -90 and 90")
+    @Test("test returns valid state when latitude is at boundary values -90 and 90")
     func testBoundaryLatitudeValuesAreValid() {
         let sut = CreateLocationViewModel()
         sut.nameField = "Amsterdam"
@@ -93,5 +93,15 @@ struct TestCreateLocationViewModel {
         sut.latitudeField = "90.0"
         sut.validateLocation()
         #expect(sut.viewData.buttonOkEnabled == true)
+    }
+    
+    @Test("test returns location with default longitude and latitude on invalid text")
+    func testDefaultLongitudeAndLatitude() {
+        let sut = CreateLocationViewModel()
+        sut.longitudeField = "invalid"
+        sut.latitudeField = "invalid"
+        
+        #expect(sut.location.longitude == 0.0)
+        #expect(sut.location.latitude == 0.0)
     }
 }
