@@ -49,4 +49,15 @@ struct TestWikipediaLauncher {
         #expect(urlOpener.canOpenURLCalled)
         #expect(!urlOpener.openCalled)
     }
+    
+    @Test("test does nothing when invalid longitude and latitude")
+    func testInvalidLongitudeAndLatitude() {
+        let urlOpener = MockURLOpener(canOpenURL: false)
+        let sut = WikipediaLauncher(urlOpener: urlOpener)
+        
+        sut.launchWith(longitude: 181.0, latitude: 91.0)
+        
+        #expect(!urlOpener.canOpenURLCalled)
+        #expect(!urlOpener.openCalled)
+    }
 }

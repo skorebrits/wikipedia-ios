@@ -17,7 +17,11 @@ extension URL {
         return url
     }
 
-    static func wikipediaOpenURLWith(longitude: Double, latitude: Double) throws -> URL {
+    static func wikipediaOpenURLWith(longitude: Double, latitude: Double) -> URL? {
+        guard longitude >= -180, longitude <= 180, latitude >= -90, latitude <= 90 else {
+            return nil
+        }
+
         var components = URLComponents()
         components.scheme = PlacesConstants.wikipediaScheme
         components.host = PlacesConstants.wikipediaHost
@@ -26,10 +30,6 @@ extension URL {
             .init(name: "lat", value: "\(latitude)")
         ]
 
-        guard let url = components.url else {
-            throw PlacesError.invalidURL
-        }
-
-        return url
+        return components.url
     }
 }

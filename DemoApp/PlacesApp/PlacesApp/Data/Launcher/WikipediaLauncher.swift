@@ -12,12 +12,10 @@ struct WikipediaLauncher {
     private let canOpenURL: URLOpener
 
     var canLaunch: Bool {
-        do {
-            let wikiPediaURl = try URL.wikipediaOpenURLWith(longitude: 0.0, latitude: 0.0)
-            return canOpenURL.canOpenURL(wikiPediaURl)
-        } catch {
+        guard let wikiPediaURl = URL.wikipediaOpenURLWith(longitude: 0.0, latitude: 0.0) else {
             return false
         }
+        return canOpenURL.canOpenURL(wikiPediaURl)
     }
 
     init(urlOpener: URLOpener = UIApplication.shared) {
@@ -26,10 +24,10 @@ struct WikipediaLauncher {
 
     func launchWith(longitude: Double, latitude: Double) {
         guard
-            let wikiPediaURl = try? URL.wikipediaOpenURLWith(longitude: longitude, latitude: latitude),
-            canOpenURL.canOpenURL(wikiPediaURl)
+            let wikipediaURl = URL.wikipediaOpenURLWith(longitude: longitude, latitude: latitude),
+            canOpenURL.canOpenURL(wikipediaURl)
         else { return }
 
-        canOpenURL.open(wikiPediaURl, options: [:], completionHandler: nil)
+        canOpenURL.open(wikipediaURl, options: [:], completionHandler: nil)
     }
 }
