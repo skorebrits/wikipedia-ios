@@ -13,4 +13,22 @@ Modify Wikipedia App to
 ## Deep link url format
 ```wikipedia://places?lat=<latitude>&lon=<longitude>```
 
-## TODO: Add info on demo app when implementing feature
+## DemoApp
+A SwiftUI app that fetches locations from a remote URL and displays them in a list.
+Tapping a location opens the Wikipedia Places tab at that coordinate via deep link.
+
+### Features
+- Fetch and display locations from a remote API
+- Open Wikipedia app at a specific coordinate via deep link
+- Add custom locations with coordinate validation
+- Displays an alert when the Wikipedia app is not installed
+- Loading and error states with retry support
+
+### Technical highlights
+- Architecture: MVVM with separated Data, Domain, and Presentation layers
+- Presenters map localized strings to view data
+- Enum-driven state management: loading, error, loaded
+- URLSession and UIApplication abstracted behind protocols for testability
+- Optimized for accessibility
+- Unit test coverage: 77% (views excluded as they contain no business logic)
+- Swift Concurrency: async/await for network requests
