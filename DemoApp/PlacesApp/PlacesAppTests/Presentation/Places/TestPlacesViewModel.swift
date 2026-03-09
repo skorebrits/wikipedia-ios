@@ -31,7 +31,7 @@ struct TestPlacesViewModel {
         let sut = await PlacesViewModel(repository: repository)
         await sut.fetchLocations()
         
-        guard case .error(_) = await sut.state else {
+        guard case .error = await sut.state else {
             Issue.record("Expected error state")
             return
         }
@@ -46,7 +46,7 @@ struct TestPlacesViewModel {
         let sut = await PlacesViewModel(repository: repository)
         await sut.fetchLocations()
         
-        guard case .loaded(_) = await sut.state else {
+        guard case .loaded = await sut.state else {
             Issue.record("Expected loaded state")
             return
         }
@@ -121,7 +121,7 @@ struct TestPlacesViewModel {
         )
         
         guard
-            case .loaded(_) = sut.state
+            case .loaded = sut.state
         else {
             Issue.record("Expected loaded state")
             return

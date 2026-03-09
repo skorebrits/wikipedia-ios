@@ -22,7 +22,7 @@ struct TestURLLocations {
     @Test("test throws error when url is invalid")
     func testInalidURL() {
         #expect(throws: PlacesError.invalidURL) {
-            let _ = try URL.locations(url: "")
+            _ = try URL.locations(url: "")
         }
     }
     

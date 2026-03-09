@@ -18,7 +18,7 @@ struct TestPlacesPresenter {
             "1" : Location(name: "b", longitude: 0.0, latitude: 0.0, createDate: Date(), userCreated: false),
             "2" : Location(name: "a", longitude: 0.0, latitude: 0.0, createDate: Date(), userCreated: false),
             "3" : Location(name: "1", longitude: 0.0, latitude: 0.0, createDate: Date(timeIntervalSince1970: 0), userCreated: true),
-            "4" : Location(name: "2", longitude: 0.0, latitude: 0.0, createDate: Date(timeIntervalSince1970: 1), userCreated: true),
+            "4" : Location(name: "2", longitude: 0.0, latitude: 0.0, createDate: Date(timeIntervalSince1970: 1), userCreated: true)
         ]
         let sut = PlacesPresenter.map(locations)
         #expect(sut.first?.id == "2")
