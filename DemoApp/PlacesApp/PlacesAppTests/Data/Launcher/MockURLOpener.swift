@@ -24,8 +24,9 @@ final class MockURLOpener: URLOpener {
         canOpenURLCalled = true
         return canOpenURL
     }
-
-    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any], completionHandler: ((Bool) -> Void)?) {
+    
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any]) async -> Bool {
         openCalled = true
+        return canOpenURLCalled
     }
 }

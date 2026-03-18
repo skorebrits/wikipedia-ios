@@ -32,3 +32,4 @@ Tapping a location opens the Wikipedia Places tab at that coordinate via deep li
 - Optimized for accessibility
 - Unit test coverage: 77% (views excluded as they contain no business logic)
 - Swift Concurrency: async/await for network requests
+- Supports swift 6

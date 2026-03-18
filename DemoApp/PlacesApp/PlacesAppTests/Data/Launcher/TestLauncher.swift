@@ -10,10 +10,11 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestWikipediaLauncher {
     
     @Test("test returns true when wikipedia installed")
-    func testCanLaunchURL() throws {
+    func testCanLaunchURL() async throws {
         let urlOpener = MockURLOpener(canOpenURL: true)
         let url = try URL.wikipediaOpenURLWith(longitude: 0, latitude: 0)
         let sut = Launcher(urlOpener: urlOpener)
@@ -31,24 +32,24 @@ struct TestWikipediaLauncher {
     }
     
     @Test("test launches url")
-    func testLaunchURL() throws {
+    func testLaunchURL() async throws {
         let urlOpener = MockURLOpener(canOpenURL: true)
         let url = try URL.wikipediaOpenURLWith(longitude: 0, latitude: 0)
         let sut = Launcher(urlOpener: urlOpener)
         
-        sut.launchWith(url: url)
+        await sut.launchWith(url: url)
         
         #expect(urlOpener.canOpenURLCalled)
         #expect(urlOpener.openCalled)
     }
     
     @Test("test does nothing if cannot launch")
-    func testLaunchURLNotSupported() throws {
+    func testLaunchURLNotSupported() async throws {
         let urlOpener = MockURLOpener(canOpenURL: false)
         let url = try URL.wikipediaOpenURLWith(longitude: 0, latitude: 0)
         let sut = Launcher(urlOpener: urlOpener)
         
-        sut.launchWith(url: url)
+        await sut.launchWith(url: url)
         
         #expect(urlOpener.canOpenURLCalled)
         #expect(!urlOpener.openCalled)

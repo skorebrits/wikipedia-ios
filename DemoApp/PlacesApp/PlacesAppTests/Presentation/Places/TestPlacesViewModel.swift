@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestPlacesViewModel {
     
     @Test("test has loading state when init")
@@ -27,11 +28,11 @@ struct TestPlacesViewModel {
     @Test("test has error state when service error on location fetching")
     func testErrorStateOnServiceError() async {
         let service = StubIsURLSession.serviceWith(feedJSON: nil, statusCode: 200, error: URLError(.notConnectedToInternet))
-        let repository = await LocationsRepository(service: service)
-        let sut = await PlacesViewModel(repository: repository)
+        let repository = LocationsRepository(service: service)
+        let sut = PlacesViewModel(repository: repository)
         await sut.fetchLocations()
         
-        guard case .error = await sut.state else {
+        guard case .error = sut.state else {
             Issue.record("Expected error state")
             return
         }
@@ -42,11 +43,11 @@ struct TestPlacesViewModel {
     @Test("test has loaded state when locations are fetched")
     func testLoadedStateOnLocationsFetched() async {
         let service = StubIsURLSession.serviceWith(feedJSON: FeedFixtures.validJSONResponse)
-        let repository = await LocationsRepository(service: service)
-        let sut = await PlacesViewModel(repository: repository)
+        let repository = LocationsRepository(service: service)
+        let sut = PlacesViewModel(repository: repository)
         await sut.fetchLocations()
         
-        guard case .loaded = await sut.state else {
+        guard case .loaded = sut.state else {
             Issue.record("Expected loaded state")
             return
         }
@@ -77,7 +78,7 @@ struct TestPlacesViewModel {
     }
     
     @Test("test open wikipedia app when selected")
-    func testOpenWikipediaWhenSelected() {
+    func testOpenWikipediaWhenSelected() async {
         let urlOpener = MockURLOpener(canOpenURL: true)
         let launcher = Launcher(urlOpener: urlOpener)
         let sut = PlacesViewModel(repository: .init(), launcher: launcher)
@@ -100,6 +101,9 @@ struct TestPlacesViewModel {
         }
         
         sut.select(id: cell.id)
+        
+        await Task.yield()
+        
         #expect(urlOpener.canOpenURLCalled)
         #expect(urlOpener.openCalled)
         #expect(!sut.showAlert)

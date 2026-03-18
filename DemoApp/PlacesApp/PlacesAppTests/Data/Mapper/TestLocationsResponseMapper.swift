@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestLocationsResponseMapper {
     
     @Test("test returns response when json is valid")

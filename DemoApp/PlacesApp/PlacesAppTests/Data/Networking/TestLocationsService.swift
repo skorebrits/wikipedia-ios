@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestLocationsService {
     
     @Test("test return response when requesting locations")

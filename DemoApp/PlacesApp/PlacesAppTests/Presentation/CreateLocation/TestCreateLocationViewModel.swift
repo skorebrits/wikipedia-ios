@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestCreateLocationViewModel {
     
     @Test("test returns okButton disabled when initialized")

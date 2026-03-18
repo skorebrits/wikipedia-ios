@@ -10,13 +10,14 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestURLLocations {
     
     @Test("test returns url when url is valid")
     func testValidURL() throws {
         let url: URL = try .locations()
-        
-        #expect(url.absoluteString == PlacesConstants.locationsURL)
+        let expected = PlacesConstants.locationsURL
+        #expect(url.absoluteString == expected)
     }
     
     @Test("test throws error when url is invalid")

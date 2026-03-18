@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct StubIsURLSession: IsURLSession {
     
     private let response: (Data, URLResponse)?

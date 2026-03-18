@@ -9,6 +9,7 @@ import Testing
 
 @testable import PlacesApp
 
+@MainActor
 struct TestLocationsMapper {
     
     @Test("test returns locations when mapping")

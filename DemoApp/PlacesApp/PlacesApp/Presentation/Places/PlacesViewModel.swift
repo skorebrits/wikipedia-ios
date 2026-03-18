@@ -54,7 +54,9 @@ final class PlacesViewModel {
             return
         }
 
-        launcher.launchWith(url: url)
+        Task { @MainActor in
+            await launcher.launchWith(url: url)
+        }
     }
 
     func addLocation(location: Location) {

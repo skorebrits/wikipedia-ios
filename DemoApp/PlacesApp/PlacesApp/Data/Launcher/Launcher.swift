@@ -19,9 +19,9 @@ struct Launcher {
         return canOpenURL.canOpenURL(url)
     }
 
-    func launchWith(url: URL) {
+    func launchWith(url: URL) async {
         guard canLaunchURL(url: url) else { return }
 
-        canOpenURL.open(url, options: [:], completionHandler: nil)
+        await _ = canOpenURL.open(url, options: [:])
     }
 }

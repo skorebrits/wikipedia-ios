@@ -10,6 +10,7 @@ import Foundation
 
 @testable import PlacesApp
 
+@MainActor
 struct TestCreateLocationPresenter {
     
     @Test("test returns CreateLocationViewData")
